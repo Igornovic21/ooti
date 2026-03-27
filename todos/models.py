@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 
 from globals.models.timestampable import TimestampMixin
@@ -8,7 +9,11 @@ class Todo(TimestampMixin, models.Model):
         PENDING = 'pending', 'Pending'
         IN_PROGRESS = 'in_progress', 'In Progress'
         DONE = 'done', 'Done'
-
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
     title = models.CharField(max_length=255)
     status = models.CharField(
         max_length=20,
